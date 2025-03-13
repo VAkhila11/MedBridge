@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointment Confirmation - MedBridge</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            background-color: #0056b3;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 5px 5px 0 0;
+        }
+        .content {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 0 0 5px 5px;
+            border: 1px solid #dee2e6;
+        }
+        .appointment-details {
+            background-color: white;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            border: 1px solid #e9ecef;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #dee2e6;
+            color: #6c757d;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #0056b3;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Appointment Confirmation</h1>
+    </div>
+    
+    <div class="content">
+        <p>Dear {{to_name}},</p>
+        
+        <p>Your appointment has been successfully booked with the following details:</p>
+        
+        <div class="appointment-details">
+            <p><strong>Doctor:</strong> Dr. {{doctor_name}}</p>
+            <p><strong>Specialization:</strong> {{specialization}}</p>
+            <p><strong>Date:</strong> {{appointment_date}}</p>
+            <p><strong>Time:</strong> {{appointment_time}}</p>
+            <p><strong>Location:</strong> {{location}}</p>
+        </div>
+        
+        <p>Please arrive 15 minutes before your scheduled appointment time.</p>
+        
+        <p>If you need to reschedule or cancel your appointment, please contact us at least 24 hours in advance.</p>
+        
+        <div style="text-align: center;">
+            <a href="#" class="button">View Appointment Details</a>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p>Best regards,<br>MedBridge Team</p>
+    </div>
+</body>
+</html> 
