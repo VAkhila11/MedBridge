@@ -1,23 +1,29 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+
 const ChatbotPage = () => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleSend = async () => {
     if (!input.trim()) return;
-    const userMessage = { text: input, sender: 'user' };
-    setMessages([...messages, userMessage]);
+
+    setLoading(true);
+    setMessages(prev => [...prev, { text: input, sender: 'user' }]);
+    setInput('');
 
     try {
-      const response = await axios.post('http://localhost:5000/api/chat', { message: input });
-      const botMessage = { text: response.data.reply, sender: 'bot' };
-      setMessages([...messages, userMessage, botMessage]);
+      const response = await axios.post(`${API_URL}/api/chat`, { message: input });
+      setMessages(prev => [...prev, { text: response.data.reply, sender: 'bot' }]);
     } catch (error) {
-      console.error(error);
+      console.error("Error sending message:", error);
+      setMessages(prev => [...prev, { text: "Sorry, I'm having trouble responding right now.", sender: 'bot' }]);
+    } finally {
+      setLoading(false);
     }
-    setInput('');
   };
 
   return (

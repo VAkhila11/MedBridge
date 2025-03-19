@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+
 const VideoGeneratorPage = () => {
   const [prompt, setPrompt] = useState("");
   const [videos, setVideos] = useState([]);
@@ -19,7 +21,7 @@ const VideoGeneratorPage = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/video-recommendation",
+        `${API_URL}/api/video-recommendation`,
         { prompt }
       );
 
