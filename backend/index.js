@@ -19,7 +19,7 @@ connectDB();
 // CORS configuration
 const corsOptions = {
   origin: process.env.NODE_ENV === 'production'
-    ? ['https://med-bridge-8euolu6y2-vakhila11s-projects.vercel.app', 'http://localhost:3000']
+    ? ['https://med-bridge-tawny.vercel.app', 'http://localhost:3000']
     : ['http://localhost:3000'],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
