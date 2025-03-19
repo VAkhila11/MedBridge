@@ -16,19 +16,14 @@ const PORT = process.env.PORT || 5000;
 // Connect to MongoDB
 connectDB();
 
-// CORS configuration
-const corsOptions = {
-  origin: process.env.NODE_ENV === 'production'
-    ? ['https://med-bridge-tawny.vercel.app', 'http://localhost:3000']
-    : ['http://localhost:3000'],
+// Enable CORS for your frontend domain
+app.use(cors({
+  origin: 'https://med-bridge-tawny.vercel.app',
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true,
-  optionsSuccessStatus: 200
-};
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
 // Middleware
-app.use(cors(corsOptions));
 app.use(bodyParser.json());
 
 // Gemini API Key
