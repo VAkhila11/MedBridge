@@ -20,11 +20,16 @@ connectDB();
 app.use(cors({
   origin: 'https://med-bridge-tawny.vercel.app',
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
+  optionsSuccessStatus: 200
+
 }));
 
 
 // Middleware
+app.options("*", cors());
+
 app.use(bodyParser.json());
 
 // Gemini API Key
