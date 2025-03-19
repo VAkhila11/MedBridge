@@ -1,0 +1,164 @@
+{
+  "doctors": [
+    {
+      "id": 1,
+      "name": "Dr. Sarah Johnson",
+      "specialization": "Cardiologist",
+      "experience": "15 years",
+      "rating": 4.8,
+      "location": "Hyderabad",
+      "coordinates": {
+        "lat": 17.3850,
+        "lng": 78.4867
+      },
+      "image": "https://randomuser.me/api/portraits/women/1.jpg",
+      "availability": "Mon-Fri, 9:00 AM - 6:00 PM",
+      "contact": "+91 98765 43210",
+      "description": "Experienced cardiologist specializing in preventive cardiology and heart disease management."
+    },
+    {
+      "id": 2,
+      "name": "Dr. Rajesh Kumar",
+      "specialization": "Pediatrician",
+      "experience": "12 years",
+      "rating": 4.9,
+      "location": "Hyderabad",
+      "coordinates": {
+        "lat": 17.4500,
+        "lng": 78.3800
+      },
+      "image": "https://randomuser.me/api/portraits/men/1.jpg",
+      "availability": "Mon-Sat, 10:00 AM - 8:00 PM",
+      "contact": "+91 98765 43211",
+      "description": "Dedicated pediatrician with expertise in child development and preventive care."
+    },
+    {
+      "id": 3,
+      "name": "Dr. Priya Sharma",
+      "specialization": "Dermatologist",
+      "experience": "8 years",
+      "rating": 4.7,
+      "location": "Hyderabad",
+      "coordinates": {
+        "lat": 17.3200,
+        "lng": 78.5500
+      },
+      "image": "https://randomuser.me/api/portraits/women/2.jpg",
+      "availability": "Mon-Fri, 11:00 AM - 7:00 PM",
+      "contact": "+91 98765 43212",
+      "description": "Specialized in treating various skin conditions and cosmetic procedures."
+    },
+    {
+      "id": 4,
+      "name": "Dr. Amit Patel",
+      "specialization": "Orthopedic Surgeon",
+      "experience": "20 years",
+      "rating": 4.9,
+      "location": "Hyderabad",
+      "coordinates": {
+        "lat": 17.4100,
+        "lng": 78.4700
+      },
+      "image": "https://randomuser.me/api/portraits/men/2.jpg",
+      "availability": "Mon-Sat, 9:00 AM - 5:00 PM",
+      "contact": "+91 98765 43213",
+      "description": "Expert in joint replacement and sports medicine."
+    },
+    {
+      "id": 5,
+      "name": "Dr. Neha Reddy",
+      "specialization": "Gynecologist",
+      "experience": "10 years",
+      "rating": 4.8,
+      "location": "Hyderabad",
+      "coordinates": {
+        "lat": 17.3500,
+        "lng": 78.5200
+      },
+      "image": "https://randomuser.me/api/portraits/women/3.jpg",
+      "availability": "Mon-Fri, 10:00 AM - 6:00 PM",
+      "contact": "+91 98765 43214",
+      "description": "Specialized in women's health and reproductive medicine."
+    },
+    {
+      "id": 6,
+      "name": "Dr. Vikram Singh",
+      "specialization": "Neurologist",
+      "experience": "18 years",
+      "rating": 4.9,
+      "location": "Hyderabad",
+      "coordinates": {
+        "lat": 17.4300,
+        "lng": 78.4500
+      },
+      "image": "https://randomuser.me/api/portraits/men/3.jpg",
+      "availability": "Mon-Fri, 9:00 AM - 5:00 PM",
+      "contact": "+91 98765 43215",
+      "description": "Expert in treating neurological disorders and conditions."
+    },
+    {
+      "id": 7,
+      "name": "Dr. Anjali Gupta",
+      "specialization": "Oncologist",
+      "experience": "15 years",
+      "rating": 4.8,
+      "location": "Hyderabad",
+      "coordinates": {
+        "lat": 17.3800,
+        "lng": 78.5000
+      },
+      "image": "https://randomuser.me/api/portraits/women/4.jpg",
+      "availability": "Mon-Fri, 10:00 AM - 6:00 PM",
+      "contact": "+91 98765 43216",
+      "description": "Specialized in cancer treatment and chemotherapy."
+    },
+    {
+      "id": 8,
+      "name": "Dr. Rahul Verma",
+      "specialization": "Psychiatrist",
+      "experience": "12 years",
+      "rating": 4.7,
+      "location": "Hyderabad",
+      "coordinates": {
+        "lat": 17.4200,
+        "lng": 78.4300
+      },
+      "image": "https://randomuser.me/api/portraits/men/4.jpg",
+      "availability": "Mon-Sat, 11:00 AM - 8:00 PM",
+      "contact": "+91 98765 43217",
+      "description": "Expert in mental health and behavioral therapy."
+    },
+    {
+      "id": 9,
+      "name": "Dr. Meera Krishnan",
+      "specialization": "ENT Specialist",
+      "experience": "14 years",
+      "rating": 4.8,
+      "location": "Hyderabad",
+      "coordinates": {
+        "lat": 17.3600,
+        "lng": 78.4800
+      },
+      "image": "https://randomuser.me/api/portraits/women/5.jpg",
+      "availability": "Mon-Fri, 9:00 AM - 7:00 PM",
+      "contact": "+91 98765 43218",
+      "description": "Specialized in ear, nose, and throat conditions."
+    },
+    {
+      "id": 10,
+      "name": "Dr. Arun Kumar",
+      "specialization": "Dentist",
+      "experience": "16 years",
+      "rating": 4.9,
+      "location": "Hyderabad",
+      "coordinates": {
+        "lat": 17.4400,
+        "lng": 78.4600
+      },
+      "image": "https://randomuser.me/api/portraits/men/5.jpg",
+      "availability": "Mon-Sat, 10:00 AM - 8:00 PM",
+      "contact": "+91 98765 43219",
+      "description": "Expert in dental care and oral health."
+    }
+  ]
+} 
