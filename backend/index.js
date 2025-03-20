@@ -18,14 +18,12 @@ connectDB();
 
 // Enable CORS for your frontend domain
 app.use(cors({
-  origin: 'https://med-bridge-tawny.vercel.app',
+  origin: ['https://med-bridge-tawny.vercel.app', 'http://localhost:3000'],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
   optionsSuccessStatus: 200
-
 }));
-
 
 // Middleware
 app.options("*", cors());
@@ -252,9 +250,19 @@ Provide only meal names with clear descriptions and portion sizes. Do not includ
 // Video recommendation endpoint
 app.post("/api/video-recommendation", validateVideoInput, async (req, res) => {
   const { prompt } = req.body;
+  console.log("Received video recommendation request for prompt:", prompt);
 
   try {
+    if (!GEMINI_API_KEY || !YOUTUBE_API_KEY) {
+      console.error("Missing API keys:", { 
+        hasGeminiKey: !!GEMINI_API_KEY, 
+        hasYoutubeKey: !!YOUTUBE_API_KEY 
+      });
+      throw new Error('Missing required API keys');
+    }
+
     // Step 1: Get AI-generated search keywords
+    console.log("Requesting keywords from Gemini API...");
     const aiResponse = await axios.post(
       `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`,
       { 
@@ -267,6 +275,7 @@ app.post("/api/video-recommendation", validateVideoInput, async (req, res) => {
     );
 
     if (!aiResponse.data?.candidates?.[0]?.content?.parts?.[0]?.text) {
+      console.error("Invalid Gemini API response:", aiResponse.data);
       throw new Error('Invalid response from Gemini API');
     }
 
@@ -274,6 +283,7 @@ app.post("/api/video-recommendation", validateVideoInput, async (req, res) => {
     console.log("Generated Keywords:", keywords);
 
     // Step 2: Use keywords to search for YouTube videos
+    console.log("Searching YouTube with keywords...");
     const youtubeResponse = await axios.get(
       `https://www.googleapis.com/youtube/v3/search`,
       {
@@ -290,6 +300,7 @@ app.post("/api/video-recommendation", validateVideoInput, async (req, res) => {
     );
 
     if (!youtubeResponse.data?.items?.length) {
+      console.error("No videos found for keywords:", keywords);
       throw new Error('No videos found for the given keywords');
     }
 
@@ -301,11 +312,18 @@ app.post("/api/video-recommendation", validateVideoInput, async (req, res) => {
       thumbnail: video.snippet.thumbnails.high.url
     }));
 
+    console.log(`Successfully found ${videos.length} videos`);
     res.json({ videos });
   } catch (error) {
-    console.error("Video API Error:", error);
+    console.error("Video API Error:", {
+      message: error.message,
+      response: error.response?.data,
+      status: error.response?.status
+    });
+    
     res.status(500).json({ 
-      error: error.response?.data?.error?.message || 'Failed to fetch video recommendations'
+      error: error.response?.data?.error?.message || error.message || 'Failed to fetch video recommendations',
+      details: process.env.NODE_ENV === 'development' ? error.message : undefined
     });
   }
 });
