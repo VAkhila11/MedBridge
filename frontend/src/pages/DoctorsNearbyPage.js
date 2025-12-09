@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+
 const DoctorsNearbyPage = () => {
   const [doctors, setDoctors] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -104,7 +106,7 @@ const DoctorsNearbyPage = () => {
         params.append('userLng', userLocation.lng);
       }
 
-      const response = await axios.get(`http://localhost:5000/api/doctors?${params}`);
+      const response = await axios.get(`${API_URL}/api/doctors?${params}`);
       let filteredDoctors = response.data.doctors;
 
       // Sort doctors based on selected criteria
@@ -211,7 +213,7 @@ const DoctorsNearbyPage = () => {
 
       console.log('Sending appointment data:', appointmentData);
 
-      const response = await axios.post('http://localhost:5000/api/appointments', appointmentData);
+      const response = await axios.post(`${API_URL}/api/appointments`, appointmentData);
 
       if (response.data.success) {
         // Set success message and show success modal
@@ -632,6 +634,8 @@ const DoctorsNearbyPage = () => {
                   }}
                 >
                   Book Now
+                  {loading && <span>Loading...</span>}
+                  
                 </button>
                 <button
                   type="button"
@@ -647,6 +651,8 @@ const DoctorsNearbyPage = () => {
                   }}
                 >
                   Cancel
+                  {loading && <span>Loading...</span>}
+                 
                 </button>
               </div>
             </form>

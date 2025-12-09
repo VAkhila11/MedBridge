@@ -16,8 +16,19 @@ const PORT = process.env.PORT || 5000;
 // Connect to MongoDB
 connectDB();
 
+// CORS configuration
+const corsOptions = {
+  origin: process.env.NODE_ENV === 'production'
+    ? ['https://med-bridge-tawny.vercel.app', 'http://localhost:3000']
+    : ['http://localhost:3000'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
+  optionsSuccessStatus: 200
+};
+
 // Middleware
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(bodyParser.json());
 
 // Gemini API Key
@@ -91,6 +102,7 @@ app.get('/api/doctors', (req, res) => {
         }));
 
         // Sort by distance
+        
         filteredDoctors.sort((a, b) => a.distance - b.distance);
         console.log('Sorted by distance');
       }

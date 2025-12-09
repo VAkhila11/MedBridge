@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+
 const NutritionPage = () => {
   const [age, setAge] = useState('');
   const [height, setHeight] = useState('');
   const [weight, setWeight] = useState('');
   const [gender, setGender] = useState('male');
-  const [disease, setDisease] = useState('');
+  const [Disease, setDisease] = useState('None');
   const [plan, setPlan] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -17,47 +19,48 @@ const NutritionPage = () => {
       return false;
     }
     if (!height || height < 50 || height > 250) {
-      setError('Please enter a valid height in cm (50-250)');
+      setError('Please enter a valid height (50-250 cm)');
       return false;
     }
     if (!weight || weight < 20 || weight > 300) {
-      setError('Please enter a valid weight in kg (20-300)');
+      setError('Please enter a valid weight (20-300 kg)');
       return false;
     }
     return true;
   };
 
-  async function handleSubmit(e) {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
-    setPlan('');
+    setLoading(true);
+    setError("");
+    setPlan("");
 
     if (!validateInputs()) {
+      setLoading(false);
       return;
     }
 
-    setLoading(true);
     try {
-      const response = await axios.post('http://localhost:5000/api/nutrition', {
+      const response = await axios.post(`${API_URL}/api/nutrition`, {
         age,
         height,
         weight,
         gender,
-        Disease: disease || 'None'
+        Disease
       });
 
       if (!response.data || !response.data.plan) {
-        throw new Error('Invalid response from server');
+        throw new Error("Invalid response from server");
       }
 
       setPlan(response.data.plan);
     } catch (error) {
-      console.error(error);
-      setError(error.response?.data?.error || 'Failed to generate nutrition plan. Please try again.');
+      console.error("Error generating nutrition plan:", error);
+      setError(error.response?.data?.error || "Failed to generate nutrition plan. Please try again.");
     } finally {
       setLoading(false);
     }
-  }
+  };
 
   return (
     <div style={{ padding: '20px', backgroundColor: '#e6ffe6', minHeight: '100vh' }}>
@@ -103,7 +106,7 @@ const NutritionPage = () => {
           <input
             type="text"
             placeholder="Any existing disease? (Optional)"
-            value={disease}
+            value={Disease}
             onChange={(e) => setDisease(e.target.value)}
             style={{ width: '100%', padding: '10px', borderRadius: '5px', border: '1px solid #ccc', marginBottom: '10px' }}
             disabled={loading}
@@ -123,6 +126,7 @@ const NutritionPage = () => {
             }}
           >
             {loading ? 'Generating Plan...' : 'Generate Plan'}
+            
           </button>
         </form>
 

@@ -1,10 +1,12 @@
 import { Widget } from 'react-chat-widget';
 import 'react-chat-widget/lib/styles.css';
 
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+
 const ChatWidget = () => {
   const handleNewMessage = async (message) => {
     try {
-      const response = await fetch('http://localhost:5000/api/chat', {
+      const response = await fetch(`${API_URL}/api/chat`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
