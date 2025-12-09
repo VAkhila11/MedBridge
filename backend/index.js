@@ -17,10 +17,23 @@ const PORT = process.env.PORT || 5000;
 connectDB();
 
 // CORS configuration
+const getAllowedOrigins = () => {
+  const origins = ['http://localhost:3000'];
+  
+  if (process.env.NODE_ENV === 'production') {
+    // Add production frontend URL from environment variable
+    if (process.env.FRONTEND_URL) {
+      origins.push(process.env.FRONTEND_URL);
+    }
+    // Fallback to hardcoded URL if env var not set
+    origins.push('https://med-bridge-tawny.vercel.app');
+  }
+  
+  return origins;
+};
+
 const corsOptions = {
-  origin: process.env.NODE_ENV === 'production'
-    ? ['https://med-bridge-tawny.vercel.app', 'http://localhost:3000']
-    : ['http://localhost:3000'],
+  origin: getAllowedOrigins(),
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,

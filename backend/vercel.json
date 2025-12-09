@@ -11,9 +11,5 @@
       "src": "/(.*)",
       "dest": "index.js"
     }
-  ],
-  "env": {
-    "NODE_ENV": "production",
-    "ALLOWED_ORIGINS": "https://med-bridge-tawny.vercel.app"
-  }
+  ]
 } 

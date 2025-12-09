@@ -1,51 +1,33 @@
 # MedBridge - Healthcare Application
 
-## Deployment Instructions
+## Quick Deployment (Vercel - Recommended)
 
-### Frontend Deployment
-You can deploy the frontend to any static hosting service of your choice (Netlify, GitHub Pages, etc.)
+The easiest way to deploy MedBridge is using Vercel:
 
-1. Build the frontend:
-```bash
-cd frontend
-npm run build
-```
+1. **Backend Deployment**
+   - Go to [vercel.com](https://vercel.com) and sign in
+   - Click "Add New Project" → Import your GitHub repository
+   - Set **Root Directory** to `backend`
+   - Add all environment variables (see Environment Variables section below)
+   - Deploy
 
-2. The build folder will contain the static files ready for deployment
+2. **Frontend Deployment**
+   - Create another project in Vercel
+   - Set **Root Directory** to `frontend`
+   - Add `REACT_APP_API_URL` environment variable with your backend URL
+   - Deploy
 
-### Backend Deployment (Render)
+3. **Update CORS**
+   - Add `FRONTEND_URL` environment variable to backend with your frontend URL
+   - Redeploy backend
 
-1. Create a Render account at https://render.com
-2. Create a new Web Service
-3. Connect your GitHub repository
-4. Configure the deployment:
-   - Build Command: `npm install`
-   - Start Command: `npm start`
-   - Environment Variables (copy from .env):
-     - PORT
-     - NODE_ENV=production
-     - MONGODB_URI (use MongoDB Atlas URL)
-     - GEMINI_API_KEY
-     - YOUTUBE_API_KEY
-     - EMAILJS_PUBLIC_KEY
-     - EMAILJS_PRIVATE_KEY
-     - EMAILJS_SERVICE_ID
-     - EMAILJS_TEMPLATE_ID
-     - EMAILJS_REMINDER_TEMPLATE_ID
+📖 **For detailed deployment instructions, see [DEPLOYMENT.md](./DEPLOYMENT.md)**
 
-### MongoDB Setup
+## Deployment Options
 
-1. Create a MongoDB Atlas account
-2. Create a new cluster
-3. Get your connection string
-4. Update MONGODB_URI in your backend environment variables
-
-### Final Steps
-
-1. Update backend CORS configuration in `backend/index.js` with your frontend domain
-2. Update backend API URL in frontend environment variables
-3. Deploy both frontend and backend
-4. Test the application
+- **Vercel** (Recommended) - Easiest setup, automatic deployments
+- **Render** - Good for backend services
+- **GitHub Actions** - Automated CI/CD (workflows included)
 
 ## Local Development
 
@@ -72,16 +54,17 @@ cd backend && npm start
 ## Environment Variables
 
 ### Frontend
-- REACT_APP_API_URL: Backend API URL
+- `REACT_APP_API_URL`: Backend API URL (e.g., `https://your-backend.vercel.app`)
 
 ### Backend
-- PORT: Server port (default: 5000)
-- NODE_ENV: development/production
-- MONGODB_URI: MongoDB connection string
-- GEMINI_API_KEY: Google Gemini API key
-- YOUTUBE_API_KEY: YouTube API key
-- EMAILJS_PUBLIC_KEY: EmailJS public key
-- EMAILJS_PRIVATE_KEY: EmailJS private key
-- EMAILJS_SERVICE_ID: EmailJS service ID
-- EMAILJS_TEMPLATE_ID: EmailJS template ID
-- EMAILJS_REMINDER_TEMPLATE_ID: EmailJS reminder template ID 
+- `PORT`: Server port (default: 5000)
+- `NODE_ENV`: `development` or `production`
+- `MONGODB_URI`: MongoDB Atlas connection string
+- `FRONTEND_URL`: Frontend deployment URL (for CORS)
+- `GEMINI_API_KEY`: Google Gemini API key
+- `YOUTUBE_API_KEY`: YouTube API key
+- `EMAILJS_PUBLIC_KEY`: EmailJS public key
+- `EMAILJS_PRIVATE_KEY`: EmailJS private key
+- `EMAILJS_SERVICE_ID`: EmailJS service ID
+- `EMAILJS_TEMPLATE_ID`: EmailJS template ID
+- `EMAILJS_REMINDER_TEMPLATE_ID`: EmailJS reminder template ID 
